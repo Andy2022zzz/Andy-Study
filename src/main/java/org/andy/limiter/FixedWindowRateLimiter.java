@@ -1,7 +1,5 @@
 package org.andy.limiter;
 
-import lombok.Data;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -10,8 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @description: 固定窗口算法
  * 缺点：限流不够平滑、无法处理窗口边界问题
  */
-@Data
-public class FixedWindowRateLimiter {
+public class FixedWindowRateLimiter implements Limiter{
 
     // 时间窗口大小 单位: 毫秒
     long windowSize;

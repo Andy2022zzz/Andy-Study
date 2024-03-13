@@ -15,8 +15,16 @@ public class LimiterDemo {
 
     @Test
     public void FixedWindowRateLimiterTest() {
-        // 这是一个窗口大小为200ms 每个窗口只允许三个请求通过的限流器
-        FixedWindowRateLimiter limiter = new FixedWindowRateLimiter(200, 3);
+        // 这是一个窗口大小为200ms 每个窗口只允许三个请求通过的限流器 相当于每67ms一个请求
+        FixedWindowRateLimiter fixedWindowRateLimiter = new FixedWindowRateLimiter(200, 3);
+        limit(fixedWindowRateLimiter);
+        // 这是一个窗口大小为500ms 分为5个切片 每个窗口只允许5个请求通过的限流器 相当于每100ms一个请求
+        SlidingWindowRateLimiter slidingWindowRateLimiter = new SlidingWindowRateLimiter(500, 5, 5);
+        limit(slidingWindowRateLimiter);
+        CommonUtil.sleep(30000);
+    }
+
+    private void limit(Limiter limiter) {
         AtomicInteger total = new AtomicInteger(100);
         for (int i = 0; i < 3; i++) {
             new Thread(() -> {
@@ -31,6 +39,5 @@ public class LimiterDemo {
                 }
             }).start();
         }
-        CommonUtil.sleep(30000);
     }
 }
