@@ -1,10 +1,14 @@
 package org.andy.common;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: Andy
@@ -15,7 +19,7 @@ public class CommonDemo {
 
     @Test
     public void test() {
-        test1(new ArrayList<>(Arrays.asList(1,2)));
+        test2();
     }
 
     class testClass {
@@ -31,8 +35,9 @@ public class CommonDemo {
         return result;
     }
 
-    public <T extends testClass> void test2() {
-
+    public void test2() {
+        List<String> list = new ArrayList<>(Collections.singletonList("11"));
+        list.add("22");
     }
 
 }
